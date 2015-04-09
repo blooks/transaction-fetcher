@@ -1,0 +1,28 @@
+{
+  "name": "coyno-transfers",
+  "version": "0.0.1",
+  "description": "A library to manage transfers for Coyno.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coyno/coyno-transfers.git"
+  },
+  "author": "Coyno <coyno@coyno.com>",
+  "contributors": [
+    {
+      "name": "Levin Keller",
+      "email": "levin@coyno.com"
+    }
+  ],
+  "scripts": {
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "coverage": "gulp coverage",
+    "build": "gulp"
+  },
+  "license": "All rights reserved",
+  "bugs": {
+    "url": "https://github.com/coyno/coyno-transfers/issues"
+  },
+  "homepage": "https://github.com/coyno/coyno-transfers"
+}
