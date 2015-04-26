@@ -3,6 +3,7 @@
 
 var mongo = require('coyno-mongo');
 var should = require('should');
+var mama = {}
 var debug = require('debug')('coyno:transfers-tests');
 
 
