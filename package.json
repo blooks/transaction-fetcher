@@ -29,10 +29,10 @@
     "coyno-mockup-data": "0.0.8",
     "coyno-mongo": "^0.1.4",
     "coyno-util": "0.0.13",
-    "lodash": "^3.7.0"
+    "lodash": "^3.7.0",
+    "debug": "^2.1.3"
   },
   "devDependencies": {
-    "debug": "^2.1.3",
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.10.0",
     "gulp-mocha": "^2.0.1",

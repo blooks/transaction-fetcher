@@ -11,4 +11,4 @@ dependencies:
    - echo "email=circleci@coyno.com" >> .npmrc
    - echo "always-auth=true" >> .npmrc
    - echo "strict-ssl=false" >> .npmrc
-   - npm install --dev
+   - npm install
