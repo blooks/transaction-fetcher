@@ -3,7 +3,6 @@ var TestDataManager = require('coyno-mockup-data').Manager;
 
 var mongo = require('coyno-mongo');
 var should = require('should');
-var _ = require('lodash');
 var debug = require('debug')('coyno:transfers-tests');
 
 var TransferSet = require('../index');
