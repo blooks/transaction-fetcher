@@ -1,3 +1,16 @@
 machine:
   node:
     version: 0.10.35
+
+dependencies:
+  override:
+    - rm ~/.npmrc
+    - echo "_auth=Y2lyY2xlY2k6MFZnb2UkazVAcmIkb1BHQWViJkI=" >> ~/.npmrc
+    - echo "email=circleci@coyno.com" >> ~/.npmrc
+    - echo "root=/home/YOUR-USERNAME/.local/lib/node_modules" >> ~/.npmrc
+    - echo "binroot=/home/YOUR-USERNAME/.local/bin" >> ~/.npmrc
+    - echo "manroot=/home/YOUR-USERNAME/.local/share/man" >> ~/.npmrc
+    - echo "always-auth=true" >> ~/.npmrc
+    - echo "strict-ssl=false" >> ~/.npmrc
+    - echo "registry=https://registry.coyno.com/" >> ~/.npmrc
+    - npm install
