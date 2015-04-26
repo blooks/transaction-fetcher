@@ -60,7 +60,7 @@ gulp.task('coverage', shell.task(
   ['node_modules/.bin/./istanbul cover node_modules/.bin/_mocha -- --recursive']
 ));
 
-gulp.task('watch:test', function() {
+gulp.task('watch:test', ['test'], function() {
   return gulp.watch(alljs, ['test']);
 });
 
