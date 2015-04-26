@@ -1,6 +1,4 @@
 machine:
-  node:
-    version: 0.10.35
   services:
     - mongodb
   environment:
