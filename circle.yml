@@ -3,3 +3,5 @@ machine:
     version: 0.10.35
   services:
     - mongodb
+  environment:
+    MONGO_URL: mongodb://localhost:27017/coyno-tests
