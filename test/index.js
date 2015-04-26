@@ -16,7 +16,7 @@ describe('Tests for Package Coyno Transfers', function() {
             });
             describe('Update and add trades', function () {
                 it('should print a lot of addresses', function (done) {
-                    done();
+                    done(null);
                 });
             });
         })
