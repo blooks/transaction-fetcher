@@ -1,10 +1,9 @@
 
-var TestDataManager = require('./testDataManager');
+var TestDataManager = require('coyno-mockup-data').Manager;
 
 var mongo = require('coyno-mongo');
 var should = require('should');
 var _ = require('lodash');
-var Q = require('q');
 var debug = require('debug')('coyno:transfers-tests');
 
 var TransferSet = require('../index');
