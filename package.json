@@ -1,5 +1,5 @@
 {
-  "name": "coyno-transactions",
+  "name": "coyno-transaction-fetcher",
   "version": "0.0.1",
   "description": "A library to manage transactions for Coyno.",
   "main": "index.js",
@@ -18,7 +18,8 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "coverage": "gulp coverage",
-    "build": "gulp"
+    "build": "gulp",
+    "start": "forever index.js"
   },
   "license": "All rights reserved",
   "bugs": {
@@ -26,11 +27,15 @@
   },
   "homepage": "https://github.com/coyno/coyno-transfers",
   "dependencies": {
-    "coyno-mockup-data": "0.0.x",
+    "async": "^0.9.0",
+    "coyno-chain": "^0.1.10",
+    "coyno-dispatcher": "0.0.x",
+    "coyno-kue": "0.0.x",
+    "coyno-log": "0.0.x",
     "coyno-mongo": "0.1.x",
-    "coyno-util": "0.0.13",
-    "lodash": "^3.7.0",
-    "debug": "^2.1.3"
+    "coyno-util": "0.0.x",
+    "debug": "^2.1.3",
+    "lodash": "^3.7.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
@@ -39,8 +44,10 @@
     "gulp-shell": "^0.4.1",
     "gulp-util": "^3.0.4",
     "jsdoc-to-markdown": "^1.0.3",
+    "coyno-mockup-data": "0.0.x",
     "mocha": "^2.2.4",
     "more-fs": "^0.5.0",
+    "nodemon": "^1.3.7",
     "q": "^1.2.1",
     "should": "^6.0.1",
     "through2": "^0.6.5"
