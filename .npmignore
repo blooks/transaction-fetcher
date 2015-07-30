@@ -1,2 +1,8 @@
 test
 circle.yml
+.editorconfig
+.gitignore
+.jshintignore
+.jshintrc
+Dockerfile
+gulpfile.js
