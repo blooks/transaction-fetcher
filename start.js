@@ -1,3 +1,4 @@
+'use strict';
 var TransactionFetcher = require('./index.js');
 var log = require('coyno-log').child({component: 'Transaction Fetcher Start Script'});
 
