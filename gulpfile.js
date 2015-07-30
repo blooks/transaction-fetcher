@@ -16,6 +16,7 @@ var alljs = files.concat(tests);
 
 
 gulp.task('test', function() {
+  process.env.MONGO_URL = 'mongodb://localhost/coynoTransactionFetcherTests';
   return gulp.src(tests).pipe(new mocha({
     reporter: 'spec',
     timeout: 60000

@@ -1,67 +1,56 @@
+var log = require('coyno-log').child({component: 'Transaction Fetcher Tests'});
+
+var TransactionFetcher = require('../index.js');
 
 
-var TestDataManager = require('coyno-mockup-data').Manager;
+var TestDataManager = require('coyno-test-data').Manager;
+var CoynoJobs = require('coyno-jobs');
 
-var mongo = require('coyno-mongo');
+
+
+var redisUrl = 'redis://localhost/coyno-transaction-fetcher-tests';
+var mongoUrl = 'mongodb://localhost/coyno-transaction-fetcher-tests';
+
+var transactionFetcher = new TransactionFetcher(mongoUrl, redisUrl);
+
+var coynoJobs = new CoynoJobs(redisUrl);
+
 var should = require('should');
-var debug = require('debug')('coyno:transfers-tests');
-var Q  = require('q');
 var _ = require('lodash');
 
-var testDataManager = new TestDataManager();
+var testDataManager = new TestDataManager(mongoUrl);
+var jobs = testDataManager.getJobs();
 
-
-var generateJob = function() {
-  var deferred = Q.defer();
-  mongo.db.collection('transfers').find({}).toArray(function(err, transfers) {
-    debug('Got transfers from mongo.', transfers);
-    if (err) return deferred.reject(err);
-    if (!(transfers.length > 0)) {
-      deferred.reject(new Error('Generating Job for Coyno Transfer tests without transfers in DB.'));
-    }
-    var result = _.map(transfers, function(transfer) {
-      return {
-        id: transfer._id
-      }
-    });
-    debug('Returning job.');
-    deferred.resolve(result);
-  });
-  return deferred.promise;
-};
-
-describe('Tests for Package Coyno Transfers', function() {
+describe('Tests for Package Coyno Transaction Fetcher', function() {
   before(function(done){
-    debug('Initialising DB.');
-    testDataManager.initDB(function(err) {
+    testDataManager.start(function(err) {
       if (err) {
         return done(err);
       }
-      debug('Filling DB.');
-      testDataManager.fillDB(['wallets','transfers'], done);
+      log.trace('Filling db.');
+      testDataManager.fillDB(['addresses','wallets'], done);
     });
   });
   after(function(done) {
-    testDataManager.closeDB(done);
-  });
-  describe('Unit tests', function () {
+    testDataManager.stop(done);
   });
   describe('Integration tests', function () {
-    before(function(done){
-      generateJob().then(function(job) {
-        debug('Job', job);
-      }).done(done);
+    before(function(done) {
+      transactionFetcher.start(done);
     });
     describe('Update bitcoin wallet', function () {
-      it('should update all transactions for bitcoin wallet', function (done) {
-        done();
+      it('should fetch all transactions for a bunch of addresses', function (done) {
+        var job = jobs.transactionFetcherJob;
+        log.trace({job: job}, 'Adding job');
+        coynoJobs.addJob('addresses.fetchTransactions', job, null, function(err, result) {
+          if (err) {
+            return done(err);
+          }
+          log.debug(result);
+          done();
+        });
       });
     });
-    describe('Update and add trades', function () {
-      it('should print a lot of addresses', function (done) {
-        done(null);
-      });
-    });
-  })
+  });
 });
 

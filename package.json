@@ -16,10 +16,10 @@
   ],
   "scripts": {
     "lint": "gulp lint",
-    "test": "gulp test",
+    "test": "mocha test -t 5000",
     "coverage": "gulp coverage",
     "build": "gulp",
-    "start": "node index.js"
+    "start": "node start.js"
   },
   "license": "All rights reserved",
   "bugs": {
@@ -30,10 +30,10 @@
     "async": "^0.9.0",
     "chai": "^2.3.0",
     "coyno-chain": "0.1.x",
-    "coyno-dispatcher": "0.0.x",
-    "coyno-kue": "0.0.x",
+    "coyno-jobs": "0.0.1",
     "coyno-log": "0.0.x",
-    "coyno-mongo": "0.1.x",
+    "coyno-mongo": ">=0.2.0 <0.3",
+    "coyno-test-data": "0.0.1",
     "coyno-util": "0.0.x",
     "debug": "^2.1.3",
     "lodash": "^3.7.0"
@@ -45,7 +45,6 @@
     "gulp-shell": "^0.4.1",
     "gulp-util": "^3.0.4",
     "jsdoc-to-markdown": "^1.0.3",
-    "coyno-mockup-data": "0.0.x",
     "mocha": "^2.2.4",
     "more-fs": "^0.5.0",
     "nodemon": "^1.3.7",
