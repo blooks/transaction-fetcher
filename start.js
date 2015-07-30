@@ -3,7 +3,11 @@ var log = require('coyno-log').child({component: 'Transaction Fetcher Start Scri
 
 var redisUrl = process.env.REDIS_URL;
 var mongoUrl = process.env.MONGO_URL;
-
+var redisHost = process.env.REDIS_HOST;
+var redisPort = process.env.REDIS_PORT;
+if (redisHost && redisPort) {
+  redisUrl = 'redis://' + redisHost + ':' + redisPort;
+}
 if (!redisUrl || !mongoUrl) {
   throw new Error('Need to set MONGO_URL and REDIS_URL as env variables.');
 }
