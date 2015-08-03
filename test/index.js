@@ -1,4 +1,4 @@
-var log = require('coyno-log').child({component: 'Transaction Fetcher Tests'});
+var log = require('coyno-log');
 
 var TransactionFetcher = require('../index.js');
 
