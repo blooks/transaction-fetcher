@@ -27,7 +27,7 @@ describe('Tests for Package Coyno Transaction Fetcher', function() {
       if (err) {
         return done(err);
       }
-      log.trace('Filling db.');
+      log.log('trace','Filling db.');
       testDataManager.fillDB(['addresses','wallets'], done);
     });
   });
@@ -41,7 +41,7 @@ describe('Tests for Package Coyno Transaction Fetcher', function() {
     describe('Update bitcoin wallet', function () {
       it('should fetch all transactions for a bunch of addresses', function (done) {
         var job = jobs.transactionFetcherJob;
-        log.trace({job: job}, 'Adding job');
+        log.log('trace','Adding job',{job: job});
         coynoJobs.addJob('addresses.fetchTransactions', job, null, function(err, result) {
           if (err) {
             return done(err);
