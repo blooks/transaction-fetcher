@@ -8,7 +8,7 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var jsdoc2md = require('jsdoc-to-markdown');
 var mfs = require('more-fs');
-
+var nodemon = require('nodemon');
 
 var files = ['lib/**/*.js'];
 var tests = ['test/**/*.js'];
@@ -16,6 +16,7 @@ var alljs = files.concat(tests);
 
 
 gulp.task('test', function() {
+  process.env.MONGO_URL = 'mongodb://localhost/coynoTransactionFetcherTests';
   return gulp.src(tests).pipe(new mocha({
     reporter: 'spec',
     timeout: 60000
@@ -60,8 +61,16 @@ gulp.task('coverage', shell.task(
   ['node_modules/.bin/./istanbul cover node_modules/.bin/_mocha -- --recursive']
 ));
 
-gulp.task('watch:test', function() {
+gulp.task('watch:test', ['test'], function() {
   return gulp.watch(alljs, ['test']);
 });
 
 gulp.task('default', ['test', 'lint', 'jsdoc', 'coverage']);
+
+gulp.task('preview', function() {
+  nodemon({
+    script: 'index.js'
+    , ext: 'js'
+    , env: { 'NODE_ENV': 'development' }
+  })
+});

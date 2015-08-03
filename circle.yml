@@ -1,14 +1,28 @@
-machine:
-  services:
-    - mongodb
-  environment:
-    MONGO_URL: mongodb://localhost:27017/coyno-tests
-
 dependencies:
   override:
-   - echo "registry=https://registry.coyno.com/" >> .npmrc
-   - echo "_auth=Y2lyY2xlY2k6MFZnb2UkazVAcmIkb1BHQWViJkI=" >> .npmrc
-   - echo "email=circleci@coyno.com" >> .npmrc
-   - echo "always-auth=true" >> .npmrc
-   - echo "strict-ssl=false" >> .npmrc
-   - npm install
+    - echo "registry="$NPM_REGISTRY >> .npmrc
+    - echo "_auth="$NPM_AUTH_TOKEN >> .npmrc
+    - echo "email="$NPM_EMAIL >> .npmrc
+    - echo "always-auth=true" >> .npmrc
+    - echo "strict-ssl=false" >> .npmrc
+    - npm install
+
+machine:
+  services:
+    - docker
+
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - docker info
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS tutum.co
+      - docker build -t tutum.co/levino/coyno-transaction-fetcher:staging .
+      - docker push tutum.co/levino/coyno-transaction-fetcher:staging
+  production:
+    branch: master
+    commands:
+      - npm publish
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS tutum.co
+      - docker build -t tutum.co/levino/coyno-transaction-fetcher .
+      - docker push tutum.co/levino/coyno-transaction-fetcher

@@ -1,24 +1,56 @@
+var log = require('coyno-log');
 
-var mongo = require('coyno-mongo');
+var TransactionFetcher = require('../index.js');
+
+
+var TestDataManager = require('coyno-test-data').Manager;
+var CoynoJobs = require('coyno-jobs');
+
+
+
+var redisUrl = 'redis://localhost/coyno-transaction-fetcher-tests';
+var mongoUrl = 'mongodb://localhost/coyno-transaction-fetcher-tests';
+
+var transactionFetcher = new TransactionFetcher(mongoUrl, redisUrl);
+
+var coynoJobs = new CoynoJobs(redisUrl);
+
 var should = require('should');
-var debug = require('debug')('coyno:transfers-tests');
+var _ = require('lodash');
 
+var testDataManager = new TestDataManager(mongoUrl);
+var jobs = testDataManager.getJobs();
 
-describe('Tests for Package Coyno Transfers', function() {
-
-    describe('Unit tests', function () {
+describe('Tests for Package Coyno Transaction Fetcher', function() {
+  before(function(done){
+    testDataManager.start(function(err) {
+      if (err) {
+        return done(err);
+      }
+      log.log('trace','Filling db.');
+      testDataManager.fillDB(['addresses','wallets'], done);
     });
-    describe('Integration tests', function () {
-            describe('Update bitcoin wallet', function () {
-                it('should update all transactions for bitcoin wallet', function (done) {
-                    done();
-                });
-            });
-            describe('Update and add trades', function () {
-                it('should print a lot of addresses', function (done) {
-                    done(null);
-                });
-            });
-        })
+  });
+  after(function(done) {
+    testDataManager.stop(done);
+  });
+  describe('Integration tests', function () {
+    before(function(done) {
+      transactionFetcher.start(done);
     });
+    describe('Update bitcoin wallet', function () {
+      it('should fetch all transactions for a bunch of addresses', function (done) {
+        var job = jobs.transactionFetcherJob;
+        log.log('trace','Adding job',{job: job});
+        coynoJobs.addJob('addresses.fetchTransactions', job, null, function(err, result) {
+          if (err) {
+            return done(err);
+          }
+          log.debug(result);
+          done();
+        });
+      });
+    });
+  });
+});
 
