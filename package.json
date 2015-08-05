@@ -31,7 +31,7 @@
     "chai": "^2.3.0",
     "coyno-chain": ">=0.1.11 <0.2",
     "coyno-jobs": "0.0.1",
-    "coyno-log": ">=0.1.0 <0.2",
+    "coyno-log": ">=0.1.1 <0.2",
     "coyno-mongo": ">=0.2.0 <0.3",
     "coyno-test-data": "0.0.1",
     "coyno-util": "0.0.x",
