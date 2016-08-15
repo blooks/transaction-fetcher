@@ -1,22 +1,22 @@
-'use strict';
-var TransactionFetcher = require('./index.js');
-var log = require('coyno-log');
+'use strict'
+var TransactionFetcher = require('./index.js')
+var log = require('@blooks/log')
 
-var redisUrl = process.env.REDIS_URL;
-var mongoUrl = process.env.MONGO_URL;
-var redisHost = process.env.REDIS_HOST;
-var redisPort = process.env.REDIS_PORT;
+var redisUrl = process.env.REDIS_URL
+var mongoUrl = process.env.MONGO_URL
+var redisHost = process.env.REDIS_HOST
+var redisPort = process.env.REDIS_PORT
 if (redisHost && redisPort) {
-  redisUrl = 'redis://' + redisHost + ':' + redisPort;
+  redisUrl = 'redis://' + redisHost + ':' + redisPort
 }
 if (!redisUrl || !mongoUrl) {
-  throw new Error('Need to set MONGO_URL and REDIS_URL as env variables.');
+  throw new Error('Need to set MONGO_URL and REDIS_URL as env variables.')
 }
 
-var transactionFetcher = new TransactionFetcher(mongoUrl, redisUrl);
+var transactionFetcher = new TransactionFetcher(mongoUrl, redisUrl)
 transactionFetcher.start(function (err) {
   if (err) {
-    return log.error(err);
+    return log.error(err)
   }
-  log.info('Transaction Fetcher started.');
-});
+  log.info('Transaction Fetcher started.')
+})

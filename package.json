@@ -1,11 +1,11 @@
 {
-  "name": "coyno-transaction-fetcher",
+  "name": "@blooks/transaction-fetcher",
   "version": "0.0.8",
-  "description": "A library to manage transactions for Coyno.",
+  "description": "A library to manage transactions for Blooks.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coyno/coyno-transaction-fetcher.git"
+    "url": "https://github.com/blooks/transaction-fetcher.git"
   },
   "author": "Coyno <coyno@coyno.com>",
   "contributors": [
@@ -16,40 +16,44 @@
   ],
   "scripts": {
     "lint": "gulp lint",
-    "test": "mocha test -t 5000",
+    "test": "mocha test -t 20000",
     "coverage": "gulp coverage",
     "build": "gulp",
     "start": "node start.js"
   },
   "license": "All rights reserved",
   "bugs": {
-    "url": "https://github.com/coyno/coyno-transaction-fetcher/issues"
+    "url": "https://github.com/blooks/transaction-fetcher/issues"
   },
-  "homepage": "https://github.com/coyno/coyno-transaction-fetcher",
+  "homepage": "https://github.com/blooks/transaction-fetcher",
   "dependencies": {
-    "async": "^0.9.0",
-    "chai": "^2.3.0",
-    "coyno-blockchain": "^0.2.3",
-    "coyno-jobs": "0.0.1",
-    "coyno-log": ">=0.1.1 <0.2",
-    "coyno-mongo": ">=0.2.0 <0.3",
-    "coyno-test-data": "0.0.1",
-    "coyno-util": "0.0.x",
-    "debug": "^2.1.3",
-    "lodash": "^3.7.0"
+    "@blooks/blockchain": "^0.2.7",
+    "@blooks/jobs": "0.0.4",
+    "@blooks/log": "^0.2.4",
+    "@blooks/mongo": "^0.2.2",
+    "@blooks/test-data": "^0.1.1",
+    "async": "^2.0.1",
+    "bitcore-lib": "^0.13.19",
+    "chai": "^3.5.0",
+    "debug": "^2.2.0",
+    "lodash": "^4.15.0",
+    "meteor-random": "0.0.3"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.10.0",
-    "gulp-mocha": "^2.0.1",
-    "gulp-shell": "^0.4.1",
-    "gulp-util": "^3.0.4",
-    "jsdoc-to-markdown": "^1.0.3",
-    "mocha": "^2.2.4",
-    "more-fs": "^0.5.0",
-    "nodemon": "^1.3.7",
-    "q": "^1.2.1",
-    "should": "^6.0.1",
-    "through2": "^0.6.5"
+    "mocha": "^3.0.2",
+    "standard": "^7.1.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "mocha": true,
+      "node": true
+    },
+    "extends": "standard"
+  },
+  "standard": {
+    "env": [
+      "node",
+      "mocha"
+    ]
   }
 }
