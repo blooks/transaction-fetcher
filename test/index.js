@@ -43,7 +43,6 @@ describe('Tests for Package Coyno Transaction Fetcher', function () {
           if (err) {
             return done(err)
           }
-          log.debug(result)
           done()
         })
       })
